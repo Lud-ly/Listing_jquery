@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>TP FORMULAIRE</title>
+		<meta charset="utf-8">
+		<meta name="description" content="TP FORMULAIRE">
+		<!-- For Internet Explhorreur : to force css3 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<!-- Tablettes 'n' Mobiles -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- main css and js -->
+
+		<script type="text/javascript" src="./js/jquery_3_3_1.js"></script>
+	    <link rel="stylesheet" type="text/css" href="./css/datatables.min.css">
+	    <link rel="stylesheet" type="text/css" href="./css/table.css">
+	    <link rel="stylesheet" type="text/css" href="./DataTables-1.10.18/images">
+    	<script type="text/javascript" charset="utf8" src="./js/datatables.min.js"></script>
+	<!-- main css and js -->
+		<script language="JavaScript">
+
+			var aOfPersonnes= [];
+			aOfPersonnes[0]= [];
+			aOfPersonnes[0]["prenom"]= "Ludovic";
+			aOfPersonnes[0]["nom"]= "Mouly";
+			aOfPersonnes[0]["age"]= "24";
+			aOfPersonnes[0]["tel"]= "0600000001";
+			aOfPersonnes[0]["mail"]= "Mouly@afpa.fr";
+
+			aOfPersonnes[1]= [];
+			aOfPersonnes[1]["prenom"]= "Julie";
+			aOfPersonnes[1]["nom"]= "Barenne";
+			aOfPersonnes[1]["age"]= "27";
+			aOfPersonnes[1]["tel"]= "0600000002";
+			aOfPersonnes[1]["mail"]= "Julie@afpa.fr";
+
+			aOfPersonnes[2]= [];
+			aOfPersonnes[2]["prenom"]= "Benjamin";
+			aOfPersonnes[2]["nom"]= "Roma-Sacconney";
+			aOfPersonnes[2]["age"]= "28";
+			aOfPersonnes[2]["tel"]= "0600000003";
+			aOfPersonnes[2]["mail"]= "Benjamin@afpa.fr";
+
+			aOfPersonnes[3]= [];
+			aOfPersonnes[3]["prenom"]= "Aurelien";
+			aOfPersonnes[3]["nom"]= "Bernal";
+			aOfPersonnes[3]["age"]= "34";
+			aOfPersonnes[3]["tel"]= "0600000004";
+			aOfPersonnes[3]["mail"]= "Aurelien@afpa.fr";
+
+			aOfPersonnes[4]= [];
+			aOfPersonnes[4]["prenom"]= "Jacques";
+			aOfPersonnes[4]["nom"]= "Coja";
+			aOfPersonnes[4]["age"]= "30";
+			aOfPersonnes[4]["tel"]= "0600000005";
+			aOfPersonnes[4]["mail"]= "Jacques@afpa.fr";
+
+			aOfPersonnes[5]= [];
+			aOfPersonnes[5]["prenom"]= "JiJou";
+			aOfPersonnes[5]["nom"]= "Pagan";
+			aOfPersonnes[5]["age"]= "29";
+			aOfPersonnes[5]["tel"]= "0600000006";
+			aOfPersonnes[5]["mail"]= "JiJou@afpa.fr";
+			
+			function constructTable()	{
+				var i;
+
+				var sHTML= "";
+				sHTML+= "<thead>";
+				sHTML+= "<tr>";
+				sHTML+= "<td>Prénom</td>";
+				sHTML+= "<td>Nom</td>";
+				sHTML+= "<td>Email</td>";
+				sHTML+= "<td>Editer</td>";
+				sHTML+= "<td>Supprimer</td>";
+				sHTML+= "</tr>";
+				sHTML+= "</thead>";
+				sHTML+= "<tbody>";
+
+				for (i=0; i<aOfPersonnes.length; i++)	{
+					sHTML+= "<tr>";
+					sHTML+= "<td>" + aOfPersonnes[i]["prenom"] + "</td>";
+					sHTML+= "<td>" + aOfPersonnes[i]["nom"] + "</td>";
+					sHTML+= "<td>" + aOfPersonnes[i]["mail"] + "</td>";
+					sHTML+= "<td onClick=\"editPersonne(" + i + ")\">Editer</td>";
+					sHTML+= "<td onClick=\"supprimPersonne(" + i +")\">Supprimer</td>";
+					sHTML+= "</tr>";
+				}
+				
+				sHTML+= "</tbody>";
+				$('#table_personnes').html(sHTML);
+			}
+			
+			function ajoutPersonne()	{
+				// Longueur actuel du tableau JS :
+				var iLongueur= aOfPersonnes.length;
+
+				// ajout une personne en fin de tableau JS
+				aOfPersonnes[iLongueur]= [];
+				aOfPersonnes[iLongueur]["prenom"]= $('#prenom').val();
+				aOfPersonnes[iLongueur]["nom"]= $('#nom').val();
+				aOfPersonnes[iLongueur]["age"]= $('#age').val();
+				aOfPersonnes[iLongueur]["tel"]= $('#telephone').val();
+				aOfPersonnes[iLongueur]["mail"]= $('#email').val();
+				
+				// Reconstruire le tableau HTML
+				rebuildDatable();
+				
+				// Vider le formulaire
+				videFormulaire();
+			}
+			
+			function rebuildDatable()	{
+				$('#table_personnes').html("");
+				tables.clear(); 
+				tables.destroy(); 
+				constructTable();
+				tables = $('#table_personnes').DataTable(configuration);
+			}
+			
+			function videFormulaire()	{
+				$("input").val(" ");
+				
+			}
+
+			function majPersonne()	{
+				// Modifier les éléments du tableau dont l'indice est iIndiceEditEnCours
+				// ajout la modif à l'indice iIndiceEditEnCours
+				aOfPersonnes[iIndiceEditEnCours]["prenom"]= $('#prenom').val();
+				aOfPersonnes[iIndiceEditEnCours]["nom"]= $('#nom').val();
+				aOfPersonnes[iIndiceEditEnCours]["age"]= $('#age').val();
+				aOfPersonnes[iIndiceEditEnCours]["tel"]= $('#telephone').val();
+				aOfPersonnes[iIndiceEditEnCours]["mail"]= $('#email').val();
+				
+				// Reconstruire le tableau HTML
+				rebuildDatable();
+				// Vider le formulaire
+				videFormulaire();
+				// Remettre mes boutons correctement
+				// Montrer le bouton ajouter
+				$(".btn_action").show();
+				// Cacher le bouton modifier
+				$(".btn_modif").removeClass('show');
+				// Cacher le bouton annuler
+				$(".btn_save").removeClass('show');
+			}
+
+			function supprimPersonne(iIndiceEditEnCours)	{
+				alert("suprim iIndiceEditEnCours = " + iIndiceEditEnCours);
+				
+				console.log(aOfPersonnes[iIndiceEditEnCours]);
+				aOfPersonnes[iIndiceEditEnCours]=$("tbody").remove();
+				rebuildDatable();
+			}
+			function annulPersonne()	{
+				videFormulaire();
+					// Reconstruire le tableau HTML
+				rebuildDatable();
+				
+				// Remettre mes boutons correctement
+				// Montrer le bouton ajouter
+				$(".btn_action").show();
+				// Cacher le bouton modifier
+				$(".btn_modif").removeClass("show");
+				// Cacher le bouton annuler
+				$(".btn_save").removeClass("show");
+			}
+			
+			var iIndiceEditEnCours;
+var iIndiceEdit;
+			function editPersonne(iIndiceEdit)	{
+				alert("iIndiceEdit = " + iIndiceEdit);
+				iIndiceEditEnCours= iIndiceEdit;
+				// J'édite la personne en question
+				$('#prenom').val( aOfPersonnes[iIndiceEdit]["prenom"] );
+				$('#nom').val( aOfPersonnes[iIndiceEdit]["nom"] );
+				$('#age').val( aOfPersonnes[iIndiceEdit]["age"] );
+				$('#telephone').val( aOfPersonnes[iIndiceEdit]["tel"] );
+				$('#email').val( aOfPersonnes[iIndiceEdit]["mail"] );
+				
+				// cacher le bouton ajouter
+				$(".btn_action").hide();
+				// Montrer le bouton modifier
+				$(".btn_modif").addClass("show");
+				// Montrer le bouton annuler
+				$(".btn_save").addClass("show");
+			}
+
+			// CONFIGURATION DATATABLE
+			const configuration = {
+				"stateSave": false,
+				"order": [[1, "asc"]],
+				"pagingType": "simple_numbers",
+				"searching": true,
+				"lengthMenu": [[10, 25, 50, 100, -1], ["Dix", "Vingt cinq", "Cinquante", "Cent", "Ze total stp"]], 
+				"language": {
+					"info": "Utilisateurs _START_ à _END_ sur _TOTAL_ sélectionnées",
+					"emptyTable": "Aucun utilisateur",
+					"lengthMenu": "_MENU_ Utilisateurs par page",
+					"search": "Rechercher : ",
+					"zeroRecords": "Aucun résultat de recherche",
+					"paginate": {
+						"previous": "Précédent",
+						"next": "Suivant"
+					},
+					"sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+					"sInfoEmpty":      "Utilisateurs 0 à 0 sur 0 sélectionnée",
+				},
+				"columns": [
+					{
+						"orderable": true
+					},
+					{
+						"orderable": true
+					},
+					{
+						"orderable": true
+					},
+					{
+						"orderable": false
+					},
+					{
+						"orderable": false
+					}
+				],
+				'retrieve': true
+			};
+
+			var tables;
+			$(document).ready(function() {
+				constructTable();
+				// INIT DATATABLE
+				tables = $('#table_personnes').DataTable(configuration);
+			});
+		</script>
+	</head>
+
+<body>
+
+	<div id="page">
+		<header><!-- Entête de la zone considérée --></header>
+
+		<nav><!-- Nav. principale de la page --></nav>
+
+		<aside><!-- Les à-cotés de la page --></aside>
+
+		<!-- Contenu textuel de la page -->
+		<section>
+			<table id="table_personnes" border="1">
+			</table>
+			<p>Prénom : <input type="text" name="prenom" id="prenom"></p>
+			<p>Nom : <input type="text" name="nom" id="nom"></p>
+			<p>Age : <input type="text" name="age" id="age"></p>
+			<p>Téléphone : <input type="text" name="telephone" id="telephone"></p>
+			<p>Email : <input type="text" name="email" id="email"></p>
+			<div class="control">
+				<button onClick="ajoutPersonne()" class="btn_action" id="btn_ajouter">AJOUTER</button>
+			
+				<button onClick="majPersonne()" class="btn_modif hide" id="btn_modifier">MODIFIER</button>
+				
+				<button onClick="annulPersonne()" class="btn_save hide" id="btn_annuler">ANNULER</button>
+			</div>
+		</section>
+
+		<footer><!-- Pied-de-page de la page --></footer>
+	</div>
+
+</body>
+</html>
+

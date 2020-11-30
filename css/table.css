@@ -1,0 +1,59 @@
+input[type=text] {
+    border: none;
+    border: 1px solid #000;
+}
+.input_nombre {
+    padding-left: 18px;
+    background-image: url(../img/number.png);
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+button {
+    text-decoration: none;
+    font-family: Verdana, Arial;
+    font-weight: bold;
+    font-size: 11px;
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+    height: 40px;
+}
+.btn_action {
+    background-color: #5bd39a;
+    color: white;
+    border: 2px solid #5bd39a;
+}
+.btn_action:hover {
+    background-color: White;
+    color: #5bd39a;
+    border: 2px solid #5bd39a;
+      transition-duration: 2s;
+}
+.btn_save {
+    background-color: #ff0000;
+    color: white;
+    border: 2px solid #ff0000;
+}
+.btn_save:hover {
+    background-color: White;
+    color: #ff0000;
+    border: 2px solid #ff0000;
+      transition-duration: 1s;
+}
+.btn_modif {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #ff0000;
+}
+.btn_modif:hover {
+    background-color: green;
+    color: #fff;
+    border: 2px solid #ff0000;
+      transition-duration: 1s;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: inline-block;
+}
