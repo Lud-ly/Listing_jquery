@@ -1,3 +1,19 @@
+body{
+    background-color: #121212;
+}
+#page{
+    width: calc(100% - 100px);
+    margin: 0 auto;
+    box-sizing: content-box;
+}
+header{
+    text-align: center;
+    padding: 5px 10px;
+    background-color: rgb(160, 157, 157);
+}
+td img{
+    width: 10%;
+}
 input[type=text] {
     border: none;
     border: 1px solid #000;
@@ -10,6 +26,7 @@ input[type=text] {
 }
 
 button {
+    display: inline-block;
     text-decoration: none;
     font-family: Verdana, Arial;
     font-weight: bold;
@@ -19,36 +36,38 @@ button {
     height: 40px;
 }
 .btn_action {
-    background-color: #5bd39a;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(10, 149, 10);
     color: white;
-    border: 2px solid #5bd39a;
+    border: 2px solid #000;
 }
 .btn_action:hover {
     background-color: White;
-    color: #5bd39a;
-    border: 2px solid #5bd39a;
-      transition-duration: 2s;
+    color: #000;
+    border: 2px solid #121212;
+    transition-duration: 2s;
 }
 .btn_save {
     background-color: #ff0000;
-    color: white;
-    border: 2px solid #ff0000;
+    color: #000;
+    border: 2px solid #000;
 }
 .btn_save:hover {
-    background-color: White;
-    color: #ff0000;
-    border: 2px solid #ff0000;
-      transition-duration: 1s;
+    background-color: #fff;
+    border: 2px solid #a00808;
+    transition-duration: 1s;
 }
 .btn_modif {
-    background-color: #fff;
-    color: #000;
-    border: 2px solid #ff0000;
+    background-color: rgb(10, 149, 10);
+    color: white;
+    border: 2px solid #000;
 }
 .btn_modif:hover {
-    background-color: green;
-    color: #fff;
-    border: 2px solid #ff0000;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid rgb(10, 149, 10);
       transition-duration: 1s;
 }
 .hide {
@@ -56,4 +75,27 @@ button {
 }
 .show {
     display: inline-block;
+    margin: 0 auto;
+}
+
+section{
+   box-sizing: content-box;
+   margin-top: 50px;
+   background-color: rgb(160, 157, 157);
+   padding: 30px;
+}
+section p{
+    text-align: center;
+}
+.control button{
+    margin: 0 auto!important;
+}
+.even{
+    background-color: rgb(207, 204, 204)!important; 
+}
+select{
+margin-bottom: 50px;
+}
+#table_personnes{
+margin-bottom: 30px;
 }
